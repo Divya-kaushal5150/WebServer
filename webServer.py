@@ -3,13 +3,13 @@ from socket import *
 # In order to terminate the program
 import sys
 
-Server='localhost'
+server='localhost'
 
 def webServer(port=13331):
   serverSocket = socket(AF_INET, SOCK_STREAM)
   
   #Prepare a server socket
-  serverSocket.bind((Server, port))
+  serverSocket.bind((server, port))
   
   #Fill in start
   #Enable server to listen for incoming connections (max 1 connection)
@@ -45,7 +45,8 @@ def webServer(port=13331):
       #Content-Type is an example on how to send a header as bytes. There are more!
       #outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
       headers = (
-        "HTTP/1.1 200 OK\r\n"  
+        "HTTP/1.1 200 OK\r\n"
+        "Server: localhost\r\n"
         "Content-Type: text/html; charset=UTF-8\r\n"  
         "Content-Length: 1024\r\n"  
         "Connection: close\r\n"  
@@ -84,6 +85,7 @@ def webServer(port=13331):
       error_message = "<html><body><h1>404 Not Found</h1></body></html>"
       error_headers = (
             "HTTP/1.1 404 Not Found\r\n"
+            "Server: localhost\r\n"
             "Content-Type: text/html; charset=UTF-8\r\n"
             "Content-Length: " + str(len(error_message)) + "\r\n"
             "Connection: close\r\n"
